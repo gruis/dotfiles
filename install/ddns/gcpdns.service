@@ -1,0 +1,10 @@
+[Unit]
+Description=Set external DNS for this instance
+After=network.target auditd.service
+
+[Service]
+ExecStart=/opt/gcp-ddns.sh
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target

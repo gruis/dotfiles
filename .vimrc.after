@@ -1,0 +1,86 @@
+scriptencoding utf-8
+set encoding=utf-8
+
+set guifont=Hack:h10
+syntax enable
+
+set background=light
+colorscheme solarized
+
+au BufRead,BufNewFile *.yml.local    set ft=yaml
+
+" map CMD-SHFT-M to :TList
+map <D-M> :Tlist<CR>
+" have Taglist gain focus when you open it
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Compact_Format = 1
+let Tlist_Show_One_File = 1
+
+
+" get rid of scrollbars
+set guioptions=aAce
+
+
+" Automatically set working directory to same as current file
+" but fail silently. 
+" http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+" autocmd BufEnter * silent! lcd %:p:h
+
+" remap command to to be accessible via Command T
+" not working yet ...
+if has("gui_macvim")
+  set transparency=10
+endif
+
+
+
+" show invisibles
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+"Invisible character colors
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+
+
+" define a function to strip trailing white space
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" strip trailing white space whenever a file is saved
+autocmd BufWritePre *.rb,*.py,*.js :call <SID>StripTrailingWhitespaces()
+
+" adds textmate indentation mappings
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
+
+" When you type an open brace, this will automatically insert a closing brace
+" on the same line, after the cursor. If you quickly hit Enter after the open
+" brace, (to begin a code block), the closing brace will be inserted on the
+" line below the cursor. If you quickly press the open brace key again after
+" the open brace, Vim won't insert anything extra, you'll just get a single
+" open brace. Finally, if you quickly type an open and close brace, Vim will
+" not do anything special.
+"
+" This functionality is now being provided by the deliMate plugin
+" https://github.com/Raimondi/delimitMate
+" 
+"inoremap {      {}<Left>
+"inoremap {<CR>  {<CR>}<Esc>O
+"inoremap {{     {
+"inoremap {}     {}
