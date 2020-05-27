@@ -36,7 +36,6 @@ function doIt() {
     --exclude "install" \
     --exclude "bootstrap.sh" \
     --exclude "README.md" \
-    --exclude "LICENSE-MIT.txt" \
     -avh --no-perms . ~;
   # source ~/.zshrc
 }

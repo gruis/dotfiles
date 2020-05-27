@@ -4,10 +4,11 @@
 set -e
 
 declare -r GITHUB_REPOSITORY="gruis/dotfiles"
+declare -r GITHUB_BRANCH=${GITHUB_BRANCH:=master}
 
 declare -r DOTFILES_ORIGIN="git@github.com:$GITHUB_REPOSITORY.git"
-declare -r DOTFILES_TARBALL_URL="https://github.com/$GITHUB_REPOSITORY/tarball/master"
-declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/master/install/utils.sh"
+declare -r DOTFILES_TARBALL_URL="https://github.com/$GITHUB_REPOSITORY/tarball/$GITHUB_BRANCH"
+declare -r DOTFILES_UTILS_URL="https://raw.githubusercontent.com/$GITHUB_REPOSITORY/$GITHUB_BRANCH/install/utils.sh"
 
 declare dotfilesDirectory="$HOME/dotfiles"
 declare skipQuestions=false
