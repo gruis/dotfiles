@@ -7,6 +7,8 @@ cd "$(dirname "${BASH_SOURCE}")";
 sudo apt-get update
 sudo apt-get -y install mosh zsh fonts-hack-ttf exuberant-ctags ack-grep </dev/tty
 
+./install/ddns.sh
+
 if ! sudo locale | grep -q "en.US.UTF-8"; then
   sudo locale-gen en_US.UTF-8
 fi
@@ -18,7 +20,6 @@ which zsh || ./install/zsh.sh
 which ruby || ./install/ruby.sh
 which docker || ./install/docker.sh
 which kubectl || ./install/kubectl.sh
-./install/ddns.sh
 
 if which go; then
   go version | grep -q "1.13" || ./install/go.sh
