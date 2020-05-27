@@ -6,9 +6,8 @@ Based off of https://github.com/mathiasbynens/dotfiles and https://github.com/al
 
 ## Using Git and the bootstrap script 
 
-You can clone the repository wherever
-you want. The bootstrapper script will pull in the latest version and
-copy the files to your home folder.
+You can clone the repository wherever you want. The bootstrapper script
+will pull in the latest version and copy the files to your home folder.
 
 ```shell
 git clone https://github.com/gruis/dotfiles.git && cd dotfiles && ./bootstrap.sh 
@@ -23,7 +22,7 @@ To update, cd into your local dotfiles repository and then:
 Alternatively, to update while avoiding the confirmation prompt:
 
 ```shell
-set -- -f; source bootstrap.sh
+bootstrap.sh --force
 ```
 
 ## Git-free install
@@ -31,7 +30,13 @@ set -- -f; source bootstrap.sh
 To install these dotfiles without Git:
 
 ```shell
-cd; curl -#L https://github.com/gruis/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh,.osx,LICENSE-MIT.txt}
+bash -c "$(wget -qO - https://raw.githubusercontent.com/gruis/dotfiles/master/install/setup.sh)"
 ```
 
-To update later on, just run that command again.
+### Unattended Install
+
+```shell
+bash -c "$(wget -qO - https://raw.githubusercontent.com/gruis/dotfiles/master/install/setup.sh)" -- --yes
+```
+
+To update later on, just run the same command

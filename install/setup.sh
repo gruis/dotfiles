@@ -148,7 +148,11 @@ main() {
     printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
         || download_dotfiles
 
-    $dotfilesDirectory/bootstrap.sh
+    if $skipQuestions; then
+      $dotfilesDirectory/bootstrap.sh --force
+    else
+      $dotfilesDirectory/bootstrap.sh
+    fi
 }
 
 main "$@"
