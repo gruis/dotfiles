@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "${BASH_SOURCE}")";
 
 sudo apt-get update
-sudo apt-get -y install mosh zsh fonts-hack-ttf exuberant-ctags ack-grep </dev/tty
+sudo apt-get -y install mosh zsh fonts-hack-ttf exuberant-ctags ack-grep 
 
 ./install/google-cloud-sdk.sh
 ./install/ddns.sh

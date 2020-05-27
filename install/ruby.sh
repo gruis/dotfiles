@@ -2,4 +2,4 @@
 
 set -e 
 
-sudo apt-get -y install ruby-full </dev/tty
+sudo apt-get -y install ruby-full 
