@@ -75,7 +75,7 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH:$HOME/bin:$HOME/local/bin
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export PATH=$PATH:/usr/local/git/bin
 
-export EDITOR='vim -f --nomru -c "au VimLeave * !open -a Terminal"'
+export EDITOR='vim'
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
