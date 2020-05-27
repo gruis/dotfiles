@@ -2,7 +2,7 @@
 
 set -e 
 
-sudo apt-get -y install zsh 
+which zsh || sudo apt-get -y install zsh 
 
 if [ -z "$ZSH_CUSTOM" ]; then
   ZSH_CUSTOM=$HOME/.oh-my-zsh/custom

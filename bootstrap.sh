@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "${BASH_SOURCE}")";
 
 sudo apt-get update
-sudo apt-get -y install mosh zsh fonts-hack-ttf exuberant-ctags ack-grep 
+sudo apt-get -y install mosh fonts-hack-ttf exuberant-ctags ack-grep 
 
 ./install/google-cloud-sdk.sh
 ./install/ddns.sh
@@ -17,7 +17,8 @@ fi
 [[ -f $HOME/.ssh/id_rsa ]] || ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
 
 [[ -d $HOME/.nvm/ ]] || ./install/nvm.sh 
-which zsh || ./install/zsh.sh
+
+./install/zsh.sh
 which ruby || ./install/ruby.sh
 which docker || ./install/docker.sh
 which kubectl || ./install/kubectl.sh
