@@ -28,7 +28,7 @@ fi
 
 [[ -d $HOME/.vim/janus ]] || curl -L https://bit.ly/janus-bootstrap | bash
 
-git pull origin master;
+[[ -d .git ]] && git pull origin master;
 
 function doIt() {
   rsync --exclude ".git/" \
