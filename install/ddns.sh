@@ -8,5 +8,5 @@ sudo cp ./ddns/gcpdns.service /etc/systemd/system/
 
 sudo systemctl enable gcpdns.service
 
-which gcloud || sudo apt-get install -y google-cloud-sdk
+./google-cloud-sdk.sh
 ./ddns/gcp-ddns.sh

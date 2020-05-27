@@ -14,13 +14,11 @@ SERVICE_ACCOUNT="$(curl -s http://metadata.google.internal/computeMetadata/v1/in
 PROJECT_ID="$(curl -s http://metadata.google.internal/computeMetadata/v1/project/project-id -H Metadata-Flavor:Google)"
 [ -z "$PROJECT_ID" ] && punt "couldn't detect project id"
 
-if [ ! -f "/etc/apt/sources.list.d/google-cloud-sdk.list" ]; then
-  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-fi
-which gpg || sudo apt-get -y install apt-transport-https ca-certificates gnupg
-[[ -f "/usr/share/keyrings/cloud.google.gpg" ]]  || curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+cd "$(dirname "${BASH_SOURCE}")";
+./google-cloud-sdk.sh
+
 if [ ! -f "/usr/bin/kubectl" ]; then
-  sudo apt-get update && sudo apt-get -y install google-cloud-sdk kubectl
+  sudo apt-get -y install kubectl
 fi
 
 [[ -d $HOME/.config/gcloud ]] || yes "n" | gcloud init --console-only --account $SERVICE_ACCOUNT --project $PROJECT_ID

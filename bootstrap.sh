@@ -7,6 +7,7 @@ cd "$(dirname "${BASH_SOURCE}")";
 sudo apt-get update
 sudo apt-get -y install mosh zsh fonts-hack-ttf exuberant-ctags ack-grep </dev/tty
 
+./install/google-cloud-sdk.sh
 ./install/ddns.sh
 
 if ! sudo locale | grep -q "en.US.UTF-8"; then
