@@ -21,6 +21,7 @@ let Tlist_Show_One_File = 1
 " get rid of scrollbars
 set guioptions=aAce
 
+:let g:session_autosave = 'no'
 
 " Automatically set working directory to same as current file
 " but fail silently. 
