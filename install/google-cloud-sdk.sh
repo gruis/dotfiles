@@ -7,6 +7,6 @@ if [ ! -f "/etc/apt/sources.list.d/google-cloud-sdk.list" ]; then
 fi
 which gpg || sudo apt-get -y install apt-transport-https ca-certificates gnupg
 [[ -f "/usr/share/keyrings/cloud.google.gpg" ]]  || curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-if [ which gcloud ]; then
+if ! which gcloud; then
   sudo apt-get update && sudo apt-get -y install google-cloud-sdk 
 fi
