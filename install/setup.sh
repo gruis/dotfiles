@@ -155,4 +155,6 @@ main() {
     fi
 }
 
+{
 main "$@"
+}  2>&1 | tee ~/dotfiles.log
