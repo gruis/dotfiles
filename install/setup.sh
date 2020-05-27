@@ -77,7 +77,7 @@ download_dotfiles() {
     rm -rf "$tmpFile"
     print_result $? "Remove archive"
 
-    cd "$dotfilesDirectory/src/os" \
+    cd "$dotfilesDirectory" \
         || return 1
 }
 
@@ -147,41 +147,7 @@ main() {
     printf "%s" "${BASH_SOURCE[0]}" | grep "setup.sh" &> /dev/null \
         || download_dotfiles
 
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ./create_directories.sh
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ./create_symbolic_links.sh "$@"
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ./create_local_config_files.sh
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ./install/main.sh
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    ./preferences/main.sh
-
-    # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-    if cmd_exists "git"; then
-        if [ "$(git config --get remote.origin.url)" != "$DOTFILES_ORIGIN" ]; then
-            ./initialize_git_repository.sh "$DOTFILES_ORIGIN"
-        fi
-
-        if ! $skipQuestions; then
-            ./update_content.sh
-        fi
-    fi
-
-    if ! $skipQuestions; then
-        ./restart.sh
-    fi
+    $dotfilesDirectory/bootstrap.sh
 }
 
 main "$@"
