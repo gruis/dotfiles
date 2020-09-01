@@ -10,9 +10,12 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 sudo apt-get update
 sudo apt-get -y install mosh fonts-hack-ttf exuberant-ctags ack-grep 
+if [[ "$INSTALL_GVIM" =~ ^[Yy]$ ]]; then
+  which gvim || sudo apt-get install vim-gtk
+fi;
 
 ./install/google-cloud-sdk.sh
-[ -z "$SKIP_DDNS" ] && ./install/ddns.sh
+[[ "$SKIP_DDNS" =~ ^[Yy]$ ]] || ./install/ddns.sh;
 
 if ! sudo locale | grep -q "en.US.UTF-8"; then
   sudo locale-gen en_US.UTF-8

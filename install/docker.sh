@@ -13,6 +13,7 @@ which docker || sudo apt-get install -y docker.io docker-compose
 which gcloud || sudo apt-get install -y  google-cloud-sdk
 sudo systemctl enable --now docker
 sudo usermod -aG docker ${USER}
+newgrp docker
 if ! grep -q gcloud $HOME/.docker/config.json; then
   gcloud auth configure-docker --quiet --account $SERVICE_ACCOUNT --project $PROJECT_ID
 fi
