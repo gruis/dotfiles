@@ -2,17 +2,23 @@
 
 set -e 
 
+[[ -f  $HOME/.dotfiles.env ]] && source $HOME/.dotfiles.env
+
 punt () {
   echo $1;
   exit 1;
 }
 
 
-SERVICE_ACCOUNT="$(curl -s http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email -H Metadata-Flavor:Google)"
-[ -z "$SERVICE_ACCOUNT" ] && punt "couldn't detect service account"
+if [ -z "$SERVICE_ACCOUNT" ]; then
+  SERVICE_ACCOUNT="$(curl -s http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/email -H Metadata-Flavor:Google)"
+  [ -z "$SERVICE_ACCOUNT" ] && punt "couldn't detect service account"
+fi
 
-PROJECT_ID="$(curl -s http://metadata.google.internal/computeMetadata/v1/project/project-id -H Metadata-Flavor:Google)"
-[ -z "$PROJECT_ID" ] && punt "couldn't detect project id"
+if [ -z "$PROJECT_ID" ]; then
+  PROJECT_ID="$(curl -s http://metadata.google.internal/computeMetadata/v1/project/project-id -H Metadata-Flavor:Google)"
+  [ -z "$PROJECT_ID" ] && punt "couldn't detect project id"
+fi
 
 cd "$(dirname "${BASH_SOURCE}")";
 ./google-cloud-sdk.sh

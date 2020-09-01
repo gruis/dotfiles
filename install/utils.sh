@@ -261,6 +261,10 @@ print_warning() {
     print_in_yellow "   [!] $1\n"
 }
 
+progress() {
+    print_in_green "   $1\n"
+}
+
 set_trap() {
 
     trap -p "$1" | grep "$2" &> /dev/null \

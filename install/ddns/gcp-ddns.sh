@@ -7,6 +7,10 @@ punt () {
   exit 1;
 }
 
+cd "$(dirname "${BASH_SOURCE}")"  \
+  && . "../utils.sh" \
+  && progress "${BASH_SOURCE}"
+
 DOMAIN_ID="devbox-aukai-io"
 DOMAIN="devbox.aukai.io"
 
