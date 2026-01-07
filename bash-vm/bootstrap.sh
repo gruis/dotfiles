@@ -2,11 +2,11 @@
 set -euo pipefail
 
 # One-liner usage:
-#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/main/bash-vm/bootstrap.sh)" -- \
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm/bootstrap.sh)" -- \
 #     --github gruis
 #
 # Or:
-#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/main/bash-vm/bootstrap.sh)" -- \
+#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm/bootstrap.sh)" -- \
 #     --pubkey "ssh-ed25519 AAAA... you@host"
 #
 # Optional:
@@ -20,9 +20,9 @@ Options:
   --pubkey "ssh-..."        Add a single public key line to ~/.ssh/authorized_keys
   --pubkey-file PATH        Add public key(s) from a local file to ~/.ssh/authorized_keys
   --force                   Overwrite ~/.bashrc and ~/.inputrc instead of backing up
-  --repo-base URL           Base URL for fetching dotfiles (raw). Default points to gruis/dotfiles main.
+  --repo-base URL           Base URL for fetching dotfiles (raw). Default points to gruis/dotfiles master.
 Examples:
-  bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/main/bash-vm/bootstrap.sh)" -- --github gruis
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm/bootstrap.sh)" -- --github gruis
 EOF
 }
 
@@ -31,7 +31,7 @@ GITHUB_USER="gruis"
 PUBKEY=""
 PUBKEY_FILE=""
 
-REPO_BASE_DEFAULT="https://raw.githubusercontent.com/gruis/dotfiles/main/bash-vm"
+REPO_BASE_DEFAULT="https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm"
 REPO_BASE="$REPO_BASE_DEFAULT"
 
 while [[ $# -gt 0 ]]; do
