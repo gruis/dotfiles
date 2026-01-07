@@ -1,0 +1,18 @@
+# ~/.bashrc (VM-friendly minimal)
+case $- in
+  *i*) ;;
+  *) return ;;
+esac
+
+# Prefer vim if present, else fall back to vi
+if command -v vim >/dev/null 2>&1; then
+  export EDITOR=vim
+  export VISUAL=vim
+else
+  export EDITOR=vi
+  export VISUAL=vi
+fi
+
+export PS1='\u@\h:\w\$ '
+
+[ -f "$HOME/.bash-vm/aliases.sh" ] && . "$HOME/.bash-vm/aliases.sh"

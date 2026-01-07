@@ -1,0 +1,11 @@
+# ~/.inputrc
+set editing-mode vi
+set keymap vi
+
+# Make Tab completion behave nicely
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+# In vi insert mode, map jk -> Esc (optional, comment out if you hate it)
+#set keymap vi-insert
+#"jk": vi-movement-mode
