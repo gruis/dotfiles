@@ -20,6 +20,12 @@ ensure_apt_packages() {
   sudo apt-get install -y "$@"
 }
 
+ensure_utf8_locale() {
+  ensure_apt_packages locales
+  sudo locale-gen en_US.UTF-8
+  sudo update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+}
+
 install_tmux_and_mosh() {
   ensure_apt_packages tmux mosh ncurses-term
   mkdir -p "$HOME/.bash-vm"
@@ -53,7 +59,7 @@ install_oh_my_posh() {
   mkdir -p "$HOME/.config/oh-my-posh"
   if [[ ! -f "$HOME/.config/oh-my-posh/theme.omp.json" ]]; then
     curl -fsSL -o "$HOME/.config/oh-my-posh/theme.omp.json" \
-      https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/jandedobbeleer.omp.json
+      https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/mojada.omp.json
   fi
 }
 
@@ -68,6 +74,7 @@ ensure_ssh_key() {
 }
 
 install_tmux_and_mosh
+ensure_utf8_locale
 install_oh_my_posh
 ensure_ssh_key
 
