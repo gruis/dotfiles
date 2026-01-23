@@ -21,6 +21,8 @@ Options:
   --pubkey-file PATH        Add public key(s) from a local file to ~/.ssh/authorized_keys
   --force                   Overwrite ~/.bashrc and ~/.inputrc instead of backing up
   --repo-base URL           Base URL for fetching dotfiles (raw). Default points to gruis/dotfiles master.
+  --stage NAME              Run a stage after base bash-vm setup (repeatable)
+  --list-stages             List available stages and exit
 Examples:
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm/bootstrap.sh)" -- --github gruis
 EOF
@@ -30,6 +32,8 @@ FORCE=0
 GITHUB_USER="gruis"
 PUBKEY=""
 PUBKEY_FILE=""
+LIST_STAGES=0
+STAGES=()
 
 REPO_BASE_DEFAULT="https://raw.githubusercontent.com/gruis/dotfiles/master/bash-vm"
 REPO_BASE="$REPO_BASE_DEFAULT"
@@ -41,10 +45,25 @@ while [[ $# -gt 0 ]]; do
     --pubkey-file) PUBKEY_FILE="${2:-}"; shift 2;;
     --force) FORCE=1; shift;;
     --repo-base) REPO_BASE="${2:-}"; shift 2;;
+    --stage) STAGES+=("${2:-}"); shift 2;;
+    --list-stages) LIST_STAGES=1; shift;;
     -h|--help) usage; exit 0;;
     *) echo "Unknown arg: $1"; usage; exit 1;;
   esac
 done
+
+list_stages() {
+  cat <<'EOF'
+Available stages:
+  shell-extras  - tmux + mosh + oh-my-posh + fonts + ssh key
+  docker        - Docker Engine from official repo + compose plugin
+EOF
+}
+
+if [[ "$LIST_STAGES" -eq 1 ]]; then
+  list_stages
+  exit 0
+fi
 
 if [[ -z "$GITHUB_USER" && -z "$PUBKEY" && -z "$PUBKEY_FILE" ]]; then
   echo "ERROR: Provide --github USERNAME or --pubkey or --pubkey-file PATH"
@@ -82,6 +101,20 @@ write_file_from_repo() {
   fetch "${REPO_BASE}/${name}" > "$dst"
 }
 
+run_stage() {
+  local name="$1"
+  case "$name" in
+    shell-extras|docker) ;;
+    *) echo "Unknown stage: $name"; list_stages; exit 1;;
+  esac
+  local tmp
+  tmp="$(mktemp)"
+  fetch "${REPO_BASE}/stages/${name}.sh" > "$tmp"
+  chmod +x "$tmp"
+  REPO_BASE="$REPO_BASE" bash "$tmp"
+  rm -f "$tmp"
+}
+
 # --- Dotfiles ---
 mkdir -p "$HOME/.bash-vm"
 
@@ -115,6 +148,12 @@ elif [[ -n "$PUBKEY" ]]; then
   printf '%s\n' "$PUBKEY" | add_key_lines
 else
   fetch "https://github.com/${GITHUB_USER}.keys" | add_key_lines
+fi
+
+if [[ "${#STAGES[@]}" -gt 0 ]]; then
+  for stage in "${STAGES[@]}"; do
+    run_stage "$stage"
+  done
 fi
 
 echo "Done."

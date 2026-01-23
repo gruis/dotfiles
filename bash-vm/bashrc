@@ -16,3 +16,13 @@ fi
 export PS1='\u@\h:\w\$ '
 
 [ -f "$HOME/.bash-vm/aliases.sh" ] && . "$HOME/.bash-vm/aliases.sh"
+
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+if command -v oh-my-posh >/dev/null 2>&1; then
+  if [[ -f "$HOME/.config/oh-my-posh/theme.omp.json" ]]; then
+    eval "$(oh-my-posh init bash --config "$HOME/.config/oh-my-posh/theme.omp.json")"
+  fi
+fi
