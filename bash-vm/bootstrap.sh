@@ -57,6 +57,7 @@ list_stages() {
 Available stages:
   shell-extras  - tmux + mosh + oh-my-posh + fonts + ssh key
   docker        - Docker Engine from official repo + compose plugin
+  codex         - Codex CLI (Node.js 20.x via NodeSource + npm)
 EOF
 }
 
@@ -104,7 +105,7 @@ write_file_from_repo() {
 run_stage() {
   local name="$1"
   case "$name" in
-    shell-extras|docker) ;;
+    shell-extras|docker|codex) ;;
     *) echo "Unknown stage: $name"; list_stages; exit 1;;
   esac
   local tmp
