@@ -30,4 +30,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/ba
   --github gruis \
   --stage codex
 ```
-Note: the stage installs Node.js 20.x (NodeSource) and Codex via npm, then prompts you to sign in on first run.
+Note: the stage installs Node.js 22.x (NodeSource) and Codex via npm, then prompts you to sign in on first run.

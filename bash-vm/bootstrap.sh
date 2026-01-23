@@ -57,7 +57,7 @@ list_stages() {
 Available stages:
   shell-extras  - tmux + mosh + oh-my-posh + fonts + ssh key
   docker        - Docker Engine from official repo + compose plugin
-  codex         - Codex CLI (Node.js 20.x via NodeSource + npm)
+  codex         - Codex CLI (Node.js 22.x via NodeSource + npm)
 EOF
 }
 
