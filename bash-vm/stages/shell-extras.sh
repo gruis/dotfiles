@@ -44,9 +44,9 @@ install_oh_my_posh() {
   mkdir -p "$font_dir"
   local tmp_dir
   tmp_dir="$(mktemp -d)"
-  curl -fsSL -o "$tmp_dir/MesloLGS_NF.zip" \
-    https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Meslo.zip
-  unzip -o -q "$tmp_dir/MesloLGS_NF.zip" -d "$font_dir"
+  curl -fsSL -o "$tmp_dir/Hack_NF.zip" \
+    https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip
+  unzip -o -q "$tmp_dir/Hack_NF.zip" -d "$font_dir"
   rm -rf "$tmp_dir"
   fc-cache -f
 
@@ -70,5 +70,11 @@ ensure_ssh_key() {
 install_tmux_and_mosh
 install_oh_my_posh
 ensure_ssh_key
+
+cat <<'EOF'
+Note: If you see boxes or question marks in the prompt, your terminal is not using a Nerd Font.
+For SSH sessions, the font must be installed and selected on your *local* machine's terminal.
+Set your terminal font to "Hack Nerd Font" (or any Nerd Font) and reconnect.
+EOF
 
 echo "shell-extras stage complete."

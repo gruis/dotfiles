@@ -9,6 +9,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/gruis/dotfiles/master/ba
   --github gruis \
   --stage shell-extras
 ```
+Note: oh-my-posh requires a Nerd Font in your local terminal. The stage installs Hack Nerd Font on the server, but you must select it locally (e.g., "Hack Nerd Font") for glyphs to render.
 
 Multiple stages
 ```
