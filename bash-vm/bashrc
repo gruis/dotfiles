@@ -8,9 +8,11 @@ esac
 if command -v vim >/dev/null 2>&1; then
   export EDITOR=vim
   export VISUAL=vim
+  export SYSTEMD_EDITOR=vim 
 else
   export EDITOR=vi
   export VISUAL=vi
+  export SYSTEMD_EDITOR=vim 
 fi
 
 export PS1='\u@\h:\w\$ '
